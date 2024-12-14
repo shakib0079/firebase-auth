@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { auth } from "@/firebase/firebase.auth";
-import {  createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {  createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
 export const AuthContext = createContext();
 
@@ -10,6 +10,7 @@ export default function AuthProvider({children}){
     // const [userCredential, setUserCredential] = useState({})
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [errorState, setErrorState] = useState(false);
     const provider = new GoogleAuthProvider();
 
     // function userCredentialHandler(email,password){
@@ -22,10 +23,10 @@ export default function AuthProvider({children}){
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/auth.user
               setLoggedInUser(user);
-              setLoading(false);
             } else {
               // User is signed out
               // ...
+              setLoading(false);
               console.log("User Logged out!")
             }
           });
@@ -38,12 +39,14 @@ export default function AuthProvider({children}){
         .then((userCredential) => {
             // Signed in 
         const user = userCredential.user;
+        setLoggedInUser(user);
         console.log(user);
         // ...
         })
         .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setErrorState(true);
         console.log(errorCode);
         console.log(errorMessage);
         });
@@ -95,12 +98,25 @@ export default function AuthProvider({children}){
         });
     }
 
+    function SignOutHandler(){
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        setLoggedInUser(null);
+        console.log("User Signed Out");
+      }).catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+    }
+
     const contextValue={
         loggedInUser,
         loading,
         signInUser,
+        errorState,
         signUpNewUser,
-        signUpWithGoogle
+        signUpWithGoogle,
+        SignOutHandler
 
     }
     
