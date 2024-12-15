@@ -3,16 +3,23 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import LoginSocial from "./LoginSocial";
 import { AuthContext } from "@/contexts/AuthProvider";
+import { useNavigate } from "react-router";
 
 export default function Signup() {
   const [ email, setEmail] = useState("");
   const [ password, setPassword ] = useState("");
+  const navigate = useNavigate();
 
-  const { signUpNewUser } = useContext(AuthContext)
+  const { signUpNewUser, loggedInUser } = useContext(AuthContext)
+
+  if(loggedInUser){
+    return navigate("/profile");
+  }
 
   function signUpFormHandler(event){
     event.preventDefault();
     signUpNewUser(email, password);
+    navigate("/profile");
   }
 
 

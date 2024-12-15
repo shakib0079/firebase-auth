@@ -10,29 +10,29 @@ export default function Login() {
 
     const [ email, setEmail] = useState("");
     const [ password, setPassword ] = useState("");
-    const {loggedInUser, loading, signInUser, errorState} = useContext(AuthContext)
+    const {loggedInUser, signInUser, errorState} = useContext(AuthContext)
     let navigate = useNavigate();
 
     
     console.log(!errorState);
     useEffect(() => {
-        if(!loading && loggedInUser){
+        if(loggedInUser){
         
             navigate("/profile");
             return;
         }
-    },[navigate, loggedInUser, loading]);
+    },[navigate, loggedInUser]);
 
     function signInHandler(event){
         event.preventDefault()
         signInUser(email, password);
-        if(errorState) return navigate("/profile");
-        return;
+        // if(errorState) return navigate("/profile");
+        // return;
     }
 
-    if(loading){
-        return <div>Loading..........</div>
-    }
+    // if(loading){
+    //     return <div>Loading..........</div>
+    // }
 
   return (
     <div className="w-2/5 p-6 flex flex-col gap-4">
