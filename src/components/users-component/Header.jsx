@@ -16,6 +16,7 @@ export default function Header() {
 
         {loggedInUser ? <NavLink to="/profile">Profile</NavLink> : (
           <>
+          <NavLink to="/products">Products</NavLink>
           <NavLink to="/login"><Button variant="Ghost">Login</Button></NavLink>
           <NavLink to="/signup"><Button>Sign up</Button></NavLink>
           </>

@@ -1,3 +1,4 @@
+import Products from "@/components/products-component/Products";
 import Home from "@/components/users-component/Home";
 import Login from "@/components/users-component/Login";
 import Profile from "@/components/users-component/Profile";
@@ -25,6 +26,10 @@ export let router = createBrowserRouter([
         {
             path: "/profile",
             Component: Profile
+        },
+        {
+          path: "/products",
+          Component: Products
         }
       ],
     },

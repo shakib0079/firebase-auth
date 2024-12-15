@@ -5,15 +5,15 @@ import AuthProvider from "@/contexts/AuthProvider";
 
 export default function UserLayout() {
   return (
-    <main className="w-full h-full flex flex-col">
+    <main className="w-full min-h-screen flex flex-col justify-between">
       <AuthProvider>
       <div className= "border-b">
         <Header/>
       </div>
-      <div className="h-3/4 flex justify-center items-center">
+      <div className="min-h-max flex justify-center items-center p-4">
         <Outlet />
       </div>
-      <div className="h-1/4 bg-slate-800">
+      <div className=" h-24 bg-slate-800">
       <Footer />
       </div>
       </AuthProvider>
