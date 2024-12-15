@@ -1,11 +1,16 @@
-import { NavLink } from "react-router";
+import {  Navigate, NavLink } from "react-router";
 import { Button } from "../ui/button";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthProvider";
 
 export default function Header() {
 
-  const { loggedInUser } = useContext(AuthContext);
+  const { loggedInUser,SignOutHandler } = useContext(AuthContext);
+
+  function logOutHandler(){
+    SignOutHandler();
+    return <Navigate to="/login"/>
+  }
 
   return (
     <div className="flex justify-between items-center p-4">
@@ -14,9 +19,14 @@ export default function Header() {
         <NavLink to="/">Home</NavLink>
 
 
-        {loggedInUser ? <NavLink to="/profile">Profile</NavLink> : (
+        {loggedInUser ? (
           <>
+          <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/products">Products</NavLink>
+          <NavLink><Button onClick={logOutHandler}>Logout</Button></NavLink>
+          </>
+        )  : (
+          <>
           <NavLink to="/login"><Button variant="Ghost">Login</Button></NavLink>
           <NavLink to="/signup"><Button>Sign up</Button></NavLink>
           </>

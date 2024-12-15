@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import ProductLists from "./ProductLists";
+import { AuthContext } from "@/contexts/AuthProvider";
+import { Navigate } from "react-router";
 
 
 export default function Products() {
     const [products, setProducts] = useState([]);
+    const { loggedInUser } = useContext(AuthContext);
+
+
+    console.log(loggedInUser);
 
     useEffect(() => {
         fetch('http://localhost:3000/products')
@@ -12,10 +18,12 @@ export default function Products() {
         .catch((error) => console.log(error))
     },[]);
 
-    console.log(products)
+    if (!loggedInUser) {
+      return <Navigate to="/login" replace />;
+    }
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex justify-center flex-wrap gap-2">
         {products.map((product) => <ProductLists key={product.id} {...product}/>)}
     </div>
   );

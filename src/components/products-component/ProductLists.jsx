@@ -1,23 +1,25 @@
 /* eslint-disable react/prop-types */
 import {
     Card,
-    CardContent,
     CardDescription,
     CardFooter,
-    CardHeader,
     CardTitle,
   } from "@/components/ui/card"
 import { Button } from "../ui/button"
 
 
-export default function ProductLists({productTitle}) {
+export default function ProductLists({productTitle,price,productImg,description,qty}) {
 
 
   return (
-    <Card className="w-60 px-2 flex flex-col justify-center items-center gap-2">
-        <img src="https://www.gadstyle.com/wp-content/uploads/2024/08/samsung-galaxy-watch-7-ai-smart-watch-40mm-44mm-2.webp" alt="" width={150}/>
-        <CardTitle className="text-xl">{productTitle}</CardTitle>
-        <CardDescription className="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero consequuntur deserunt eius. Eaque minus provident cupiditate impedit.</CardDescription>
+    <Card className="w-80 px-4 flex flex-col justify-center items-center gap-2">
+        <img src={productImg} alt="" width={150}/>
+        <div className="w-full flex justify-between items-center">
+        <CardTitle className="text-sm">{productTitle}</CardTitle>
+        <CardTitle className="text-lg">{price} ৳</CardTitle>
+        </div>
+        <CardDescription className="text-justify">{description}</CardDescription>
+        <h1 className="text-sm">Availbale: {qty} qty</h1>
         <CardFooter>
             <Button>Add to Cart</Button>
         </CardFooter>

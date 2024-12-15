@@ -7,15 +7,11 @@ import {  createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged
 export const AuthContext = createContext();
 
 export default function AuthProvider({children}){
-    // const [userCredential, setUserCredential] = useState({})
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [errorState, setErrorState] = useState(false);
     const provider = new GoogleAuthProvider();
 
-    // function userCredentialHandler(email,password){
-    //     setUserCredential({...userCredential, email, password});
-    // }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
