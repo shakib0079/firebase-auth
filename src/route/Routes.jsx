@@ -1,3 +1,4 @@
+import ProductAdd from "@/components/products-component/ProductAdd";
 import Products from "@/components/products-component/Products";
 import Home from "@/components/users-component/Home";
 import Login from "@/components/users-component/Login";
@@ -30,6 +31,10 @@ export let router = createBrowserRouter([
         {
           path: "/products",
           Component: Products
+        },
+        {
+          path: "/addproduct",
+          Component: ProductAdd
         }
       ],
     },
