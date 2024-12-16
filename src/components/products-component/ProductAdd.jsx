@@ -1,9 +1,12 @@
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/contexts/AuthProvider";
+import { Navigate } from "react-router";
 
 export default function ProductAdd() {
+    const { loggedInUser } = useContext(AuthContext);
     
     const [productTitle, setProductTitle] = useState('');
     const [productImg, setProductImg] = useState('');
@@ -42,6 +45,10 @@ export default function ProductAdd() {
         .catch((error) => console.log(error))
 
 
+    }
+
+    if(!loggedInUser){
+        return <Navigate to="/login"/>
     }
 
   return (

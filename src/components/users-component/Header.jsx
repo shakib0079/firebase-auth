@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <div className="flex justify-between items-center p-4">
-      <h1 className="text-md font-bold">Banking Apps</h1>
+      <h1 className="text-md font-bold">Firebase Auth With Node</h1>
       <div className="flex gap-4 text-sm font-semibold items-center">
         <NavLink to="/">Home</NavLink>
 
@@ -23,6 +23,7 @@ export default function Header() {
           <>
           <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/products">Products</NavLink>
+          <NavLink to="/addproduct">Add Product</NavLink>
           <NavLink><Button onClick={logOutHandler}>Logout</Button></NavLink>
           </>
         )  : (
